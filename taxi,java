@@ -1,0 +1,114 @@
+package p13;
+
+import java.util.*;
+class NoVehicleAvailableException extends Exception {
+ public NoVehicleAvailableException(String message) {
+     super(message);
+ }
+}
+class Taxi {
+ private int taxiId;
+ private String location;
+ private boolean isAvailable;
+
+ public Taxi(int taxiId, String location) {
+     this.taxiId = taxiId;
+     this.location = location;
+     this.isAvailable = true;
+ }
+
+ public int getTaxiId() {
+     return taxiId;
+ }
+
+ public String getLocation() {
+     return location;
+ }
+
+ public boolean isAvailable() {
+     return isAvailable;
+ }
+
+ public void bookTaxi() {
+     isAvailable = false;
+ }
+
+ public void releaseTaxi() {
+     isAvailable = true;
+ }
+}
+class TaxiService {
+ private List<Taxi> taxis = new ArrayList<>();
+
+ public TaxiService() {
+     taxis.add(new Taxi(1, "A"));
+     taxis.add(new Taxi(2, "B"));
+     taxis.add(new Taxi(3, "A"));
+ }
+
+ public Taxi bookTaxi(String pickupLocation) throws NoVehicleAvailableException {
+     for (Taxi taxi : taxis) {
+         if (taxi.getLocation().equalsIgnoreCase(pickupLocation) && taxi.isAvailable()) {
+             taxi.bookTaxi();
+             return taxi;
+         }
+     }
+     throw new NoVehicleAvailableException("❌ No taxis available at location: " + pickupLocation);
+ }
+
+ public void showAvailableTaxis() {
+     System.out.println("\nAvailable Taxis:");
+     for (Taxi taxi : taxis) {
+         if (taxi.isAvailable()) {
+             System.out.println("Taxi ID: " + taxi.getTaxiId() + " | Location: " + taxi.getLocation());
+         }
+     }
+ }
+}
+public class Main {
+
+ public static void main(String[] args) {
+
+     Scanner sc = new Scanner(System.in);
+     TaxiService service = new TaxiService();
+
+     while (true) {
+         System.out.println("\n===== 🚕 TAXI BOOKING SYSTEM =====");
+         System.out.println("1. Show Available Taxis");
+         System.out.println("2. Book Taxi");
+         System.out.println("3. Exit");
+         System.out.print("Choose option: ");
+
+         int choice = sc.nextInt();
+         sc.nextLine(); // consume newline
+
+         switch (choice) {
+
+             case 1:
+                 service.showAvailableTaxis();
+                 break;
+
+             case 2:
+                 System.out.print("Enter Pickup Location (A/B): ");
+                 String location = sc.nextLine();
+
+                 try {
+                     Taxi bookedTaxi = service.bookTaxi(location);
+                     System.out.println("Taxi Booked Successfully!");
+                     System.out.println("Taxi ID: " + bookedTaxi.getTaxiId());
+                 } catch (NoVehicleAvailableException e) {
+                     System.out.println(e.getMessage());
+                 }
+                 break;
+
+             case 3:
+                 System.out.println("Thank you for using Taxi Service 🚖");
+                 sc.close();
+                 System.exit(0);
+
+             default:
+                 System.out.println("Invalid choice!");
+         }
+     }
+ }
+}
