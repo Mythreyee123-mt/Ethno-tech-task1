@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hospital Feedback Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+
+            /* Hospital Background Image */
+            background: url('https://images.unsplash.com/photo-1586773860418-d37222d8fce3') no-repeat center center/cover;
+        }
+
+        /* Overlay for better readability */
+        body::before {
+            content: "";
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+        .container {
+            width: 40%;
+            margin: 40px auto;
+            background: rgba(255, 255, 255, 0.9); /* glass effect */
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            backdrop-filter: blur(8px);
+        }
+
+        h2 {
+            text-align: center;
+            color: #1e3a8a;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 15px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+
+        textarea {
+            resize: none;
+        }
+
+        .rating {
+            display: flex;
+            gap: 10px;
+            margin-top: 5px;
+        }
+
+        .rating label {
+            font-weight: normal;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 20px;
+            padding: 12px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1e40af;
+        }
+
+        /* Thank You Message */
+        #thankyouMsg {
+            display: none;
+            text-align: center;
+        }
+
+        #thankyouMsg h3 {
+            color: #16a34a;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>🏥 Hospital Feedback Form</h2>
+
+    <!-- FORM -->
+    <form id="feedbackForm" onsubmit="showMessage(event)">
+        <label>Patient Name</label>
+        <input type="text" placeholder="Enter your name" required>
+
+        <label>Age</label>
+        <input type="number" required>
+
+        <label>Gender</label>
+        <select required>
+            <option value="">Select</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+        </select>
+
+        <label>Department Visited</label>
+        <select required>
+            <option value="">Select</option>
+            <option>General Medicine</option>
+            <option>Cardiology</option>
+            <option>Orthopedics</option>
+            <option>Pediatrics</option>
+            <option>Gynecologist</option>
+        </select>
+        
+
+        <label>Doctor Name</label>
+        <input type="text" placeholder="Doctor name">
+
+        <label>Rate Our Service</label>
+        <div class="rating">
+            <label><input type="radio" name="rating"> 1</label>
+            <label><input type="radio" name="rating"> 2</label>
+            <label><input type="radio" name="rating"> 3</label>
+            <label><input type="radio" name="rating"> 4</label>
+            <label><input type="radio" name="rating"> 5</label>
+        </div>
+
+        <label>Cleanliness</label>
+        <select>
+            <option>Excellent</option>
+            <option>Good</option>
+            <option>Average</option>
+            <option>Poor</option>
+        </select>
+
+        <label>Staff Behavior</label>
+        <select>
+            <option>Excellent</option>
+            <option>Good</option>
+            <option>Average</option>
+            <option>Poor</option>
+        </select>
+
+        <label>Suggestions / Comments</label>
+        <textarea rows="4" placeholder="Write your feedback..."></textarea>
+
+        <button type="submit">Submit Feedback</button>
+    </form>
+
+    <!-- THANK YOU MESSAGE -->
+    <div id="thankyouMsg">
+        <h3>🎉 Thank You for Your Feedback!</h3>
+        <p>Your response has been submitted successfully.</p>
+        <p>We wish you good health! 💙</p>
+    </div>
+</div>
+
+<!-- SCRIPT -->
+<script>
+function showMessage(event) {
+    event.preventDefault();
+
+    document.getElementById("feedbackForm").style.display = "none";
+    document.getElementById("thankyouMsg").style.display = "block";
+}
+</script>
+
+</body>
+</html>
