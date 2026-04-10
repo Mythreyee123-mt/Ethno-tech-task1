@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Industry Level SaaS</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+body{background:#020617;color:#fff;overflow-x:hidden}
+section{padding:90px 10%}
+
+/* NAV */
+nav{
+ position:fixed;width:100%;top:0;
+ display:flex;justify-content:space-between;align-items:center;
+ padding:15px 10%;
+ background:rgba(2,6,23,0.7);
+ backdrop-filter:blur(15px);
+ z-index:1000
+}
+nav h2{color:#38bdf8}
+nav a{margin-left:20px;color:white;text-decoration:none}
+nav a:hover{color:#38bdf8}
+
+/* HERO */
+.hero{
+ height:100vh;
+ display:flex;flex-direction:column;justify-content:center;align-items:center;
+ text-align:center;
+ background:radial-gradient(circle at top,#0ea5e9,#020617);
+}
+.hero h1{font-size:60px;animation:fadeIn 1.5s ease}
+.hero p{margin:20px 0;color:#94a3b8}
+.btn{
+ padding:14px 35px;
+ border-radius:30px;
+ background:#38bdf8;
+ color:#020617;
+ font-weight:600;
+ transition:0.3s
+}
+.btn:hover{background:#0ea5e9;color:white}
+
+/* STATS */
+.stats{
+ display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+ text-align:center;gap:20px
+}
+.stats h2{color:#38bdf8}
+
+/* FEATURES */
+.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px}
+.card{
+ background:#0f172a;
+ padding:25px;border-radius:15px;
+ transition:0.4s;
+ box-shadow:0 15px 35px rgba(0,0,0,0.5)
+}
+.card:hover{transform:translateY(-10px) scale(1.05)}
+
+/* TESTIMONIAL */
+.testimonials{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px}
+
+/* PRICING */
+.pricing{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px;text-align:center}
+.price{font-size:30px;color:#38bdf8}
+.highlight{border:2px solid #38bdf8}
+
+/* CONTACT */
+form{max-width:500px;margin:auto;background:#0f172a;padding:25px;border-radius:15px}
+input,textarea{width:100%;padding:12px;margin:10px 0;border-radius:8px;border:none}
+button{padding:12px;border:none;border-radius:8px;background:#38bdf8;color:#020617;cursor:pointer}
+button:hover{background:#0ea5e9;color:white}
+
+footer{text-align:center;padding:20px;background:black}
+.success{display:none;color:#22c55e;text-align:center;margin-top:10px}
+
+/* ANIMATIONS */
+@keyframes fadeIn{
+ from{opacity:0;transform:translateY(20px)}
+ to{opacity:1;transform:translateY(0)}
+}
+.reveal{opacity:0;transform:translateY(40px);transition:1s}
+.reveal.active{opacity:1;transform:translateY(0)}
+
+</style>
+</head>
+<body>
+
+<nav>
+<h2>MyBrand</h2>
+<div>
+<a href="#features">Features</a>
+<a href="#pricing">Pricing</a>
+<a href="#contact">Contact</a>
+</div>
+</nav>
+
+<section class="hero">
+<h1>Scale Your Business Faster</h1>
+<p>Industry-level platform with powerful features</p>
+<a href="#contact" class="btn">Get Started</a>
+</section>
+
+<section class="reveal">
+<div class="stats">
+<div><h2 id="users">0</h2><p>Users</p></div>
+<div><h2 id="growth">0</h2><p>Growth %</p></div>
+<div><h2 id="clients">0</h2><p>Clients</p></div>
+</div>
+</section>
+
+<section id="features" class="reveal">
+<h2 style="text-align:center;margin-bottom:40px">Features</h2>
+<div class="features">
+<div class="card">⚡ Fast Performance</div>
+<div class="card">🔒 Secure System</div>
+<div class="card">☁️ Cloud Ready</div>
+</div>
+</section>
+
+<section class="reveal" style="background:#020617">
+<h2 style="text-align:center;margin-bottom:40px">Testimonials</h2>
+<div class="testimonials">
+<div class="card">"Best ever"<br>- Client A</div>
+<div class="card">"Loved it"<br>- Client B</div>
+<div class="card">"Top quality"<br>- Client C</div>
+</div>
+</section>
+
+<section id="pricing" class="reveal">
+<h2 style="text-align:center;margin-bottom:40px">Pricing</h2>
+<div class="pricing">
+<div class="card">Basic<br><span class="price">$10</span></div>
+<div class="card highlight">Pro<br><span class="price">$25</span></div>
+<div class="card">Enterprise<br><span class="price">$50</span></div>
+</div>
+</section>
+
+<section id="contact" class="reveal">
+<h2 style="text-align:center">Contact</h2>
+<form onsubmit="submitForm(event)">
+<input placeholder="Name" required>
+<input type="email" placeholder="Email" required>
+<textarea placeholder="Message" required></textarea>
+<button>Send</button>
+</form>
+<p id="msg" class="success">Message Sent!</p>
+</section>
+
+<footer>
+<p>© 2026 MyBrand</p>
+</footer>
+
+<script>
+
+// FORM
+function submitForm(e){
+ e.preventDefault();
+ document.getElementById('msg').style.display='block';
+}
+
+// SCROLL ANIMATION
+window.addEventListener('scroll',()=>{
+ document.querySelectorAll('.reveal').forEach(el=>{
+  let top=el.getBoundingClientRect().top;
+  if(top<window.innerHeight-100){
+   el.classList.add('active');
+  }
+ })
+})
+
+// COUNTER
+function animate(id,target){
+ let count=0;
+ let inc=target/100;
+ let interval=setInterval(()=>{
+  count+=inc;
+  if(count>=target){count=target;clearInterval(interval)}
+  document.getElementById(id).innerText=Math.floor(count)
+ },20)
+}
+
+window.onload=()=>{
+ animate('users',5000);
+ animate('growth',120);
+ animate('clients',300);
+}
+
+</script>
+
+</body>
+</html>
